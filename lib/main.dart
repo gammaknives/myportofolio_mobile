@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.indigo,
           secondary: Colors.amber[700],
         ),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 108, 215, 242),
         useMaterial3: true,
       ),
       home: MyHomePage(),
