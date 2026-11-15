@@ -71,7 +71,13 @@ class MyHomePage extends StatelessWidget {
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
+                      return TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0, end: 1),
+                        duration: const Duration(milliseconds: 600),
+                        builder: (context, value, child) =>
+                            Opacity(opacity: value, child: child),
+                        child: ItemCard(item),
+                      );
                     }).toList(),
                   ),
                 ],
@@ -142,7 +148,17 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                backgroundColor: item.color,
+                behavior: SnackBarBehavior.floating,
+                content: Row(
+                  children: [
+                    Icon(item.icon, color: Colors.white),
+                    const SizedBox(width: 8),
+                    Text("Kamu telah menekan tombol ${item.name}!"),
+                  ],
+                ),
+              ),
             );
         },
         child: Container(
