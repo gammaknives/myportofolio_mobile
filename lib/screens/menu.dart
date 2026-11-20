@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
-import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -9,13 +9,23 @@ class MyHomePage extends StatelessWidget {
   final String nama = "Nuno Mikael Nugroho";
   final String kelas = "PBP D";
 
-  final String bio =
-      "Mahasiswa Ilmu Komputer di Fasilkom UI";
-  final List<String> skills = ["Python", "Java", "HTML", "CSS","JavaScript", "Django", "Flutter", "SQL", "C"];
+  final String bio = "Mahasiswa Ilmu Komputer di Fasilkom UI";
+  final List<String> skills = [
+    "Python",
+    "Java",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Django",
+    "Flutter",
+    "SQL",
+    "C"
+  ];
 
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder, Colors.orange),
     ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
+    ItemHomepage("Tambah Pengalaman", Icons.work, Colors.purple),
     ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
@@ -56,7 +66,7 @@ class MyHomePage extends StatelessWidget {
 
               const SizedBox(height: 16.0),
 
-              // Fitur ekstra: kartu About berisi avatar, bio, dan skill.
+              // Fitur ekstra: kartu About berisi foto, bio, dan skill.
               AboutCard(
                 imagePath: "assets/pbpavatar.jpg",
                 initials: "NM",
@@ -241,67 +251,4 @@ class ItemHomepage {
   final Color color;
 
   ItemHomepage(this.name, this.icon, this.color);
-}
-
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      // Menggunakan warna unik dari setiap item.
-      color: item.color,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                backgroundColor: item.color,
-                behavior: SnackBarBehavior.floating,
-                content: Row(
-                  children: [
-                    Icon(item.icon, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text("Kamu telah menekan tombol ${item.name}!"),
-                  ],
-                ),
-              ),
-            );
-          if (item.name == "Tambah Proyek") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
-            );
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
