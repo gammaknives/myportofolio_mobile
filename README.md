@@ -1,8 +1,10 @@
-Gambaran Umum
+# MyPortfolio Mobile - Nuno Mikael Nugroho
+
+## Gambaran Umum
 
 Aplikasi portofolio pribadi berbasis Flutter yang dibuat untuk mata kuliah Pemrograman Berbasis Platform, dan menjadi versi mobile dari website portofolio Django saya. Proyek myportofolio_mobile dimulai pada Tugas Individu 7 dengan satu halaman utama (MyHomePage) yang menampilkan identitas, profil singkat, dan tiga tombol aksi. Pada Tugas Individu 8, aplikasi dikembangkan dengan drawer navigasi, formulir Tambah Proyek, dan formulir Tambah Pengalaman yang dilengkapi validasi serta dialog ringkasan isian. Kode dipisahkan ke folder screens/ (halaman) dan widgets/ (komponen yang dipakai ulang), sedangkan lib/main.dart hanya berisi bootstrap aplikasi dan konfigurasi tema.
 
-Fitur
+## Fitur
 Halaman utama StatelessWidget di berkas terpisah MyHomePage berada di lib/screens/menu.dart, terpisah dari main.dart yang hanya menjalankan runApp() dan mengatur MaterialApp
 Tiga kartu informasi (InfoCard) menampilkan NPM, nama lengkap, dan kelas PBP saya secara sejajar di bagian atas halaman
 Kartu aksi (ItemCard) Lihat Proyek, Tambah Proyek, Tambah Pengalaman, dan Logout, masing-masing dengan ikon dan warna latar yang berbeda (oranye, hijau, ungu, merah) yang disimpan pada class ItemHomepage
@@ -22,7 +24,8 @@ Animasi fade-in pada kartu aksi (Tugas 7) setiap ItemCard muncul perlahan selama
 Bagian About (AboutCard) (Tugas 7) kartu profil dengan foto dari aset lokal di sisi kiri, serta nama, bio, dan daftar skill (Chip) di sisi kanan. Jika foto gagal dimuat, ditampilkan inisial nama
 Latar belakang gradasi (Tugas 7) seluruh halaman memakai gradasi warna biru yang dipasang lewat builder pada MaterialApp
 Halaman dapat di-scroll (Tugas 7) isi halaman utama dibungkus SingleChildScrollView agar tidak terjadi overflow pada layar kecil
-Struktur Proyek
+
+## Struktur Proyek
 myportofolio_mobile/
 ├── assets/
 │   └── pbpavatar.jpg           # foto untuk AboutCard
@@ -43,7 +46,7 @@ flutter analyze
 
 Setelah menambah atau mengubah aset pada pubspec.yaml, hentikan aplikasi sepenuhnya lalu jalankan ulang flutter run, karena hot reload dan hot restart tidak memuat aset baru.
 
-Tech Stack
+## Tech Stack
 Flutter framework UI untuk membangun aplikasi dari satu basis kode, dijalankan di Chrome selama pengembangan
 Dart bahasa pemrograman yang dipakai Flutter
 Material 3 sistem desain bawaan (useMaterial3: true) dengan skema warna yang dibuat dari warna dasar indigo lewat ColorScheme.fromSeed
