@@ -236,10 +236,12 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                     ),
                     initialValue: _category,
                     items: _categories
-                        .map((category) => DropdownMenuItem(
-                              value: category,
-                              child: Text(category),
-                            ))
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category),
+                          ),
+                        )
                         .toList(),
                     onChanged: (String? newValue) {
                       setState(() {
