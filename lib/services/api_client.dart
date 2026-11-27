@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:myportofolio_mobile/config.dart';
+import 'package:myportofolio_mobile/models/experience.dart';
 import 'package:myportofolio_mobile/models/project.dart';
 
-/// Exception thrown when an API request returns a non-2xx status code.
 class ApiException implements Exception {
   const ApiException(this.statusCode, this.message);
 
@@ -15,7 +15,6 @@ class ApiException implements Exception {
   String toString() => 'ApiException($statusCode): $message';
 }
 
-/// HTTP client for the MyPortfolio Django REST Framework backend.
 class ApiClient {
   ApiClient({http.Client? client, this.baseUrl = apiBaseUrl})
     : _client = client ?? http.Client();
@@ -56,6 +55,37 @@ class ApiClient {
     return Project.fromJson(_decodeJson(response) as Map<String, dynamic>);
   }
 
+  Future<List<Experience>> getExperiences() async {
+    final response = await _client.get(
+      _uri('/api/v1/experiences/'),
+      headers: const {'Accept': 'application/json'},
+    );
+    _ensureSuccess(response);
+
+    final decoded = _decodeJson(response) as List<dynamic>;
+    return decoded
+        .map((item) => Experience.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<Experience> createExperience(
+    Experience experience, {
+    required String token,
+  }) async {
+    final response = await _client.post(
+      _uri('/api/v1/experiences/'),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token',
+      },
+      body: jsonEncode(experience.toJson()),
+    );
+    _ensureSuccess(response);
+
+    return Experience.fromJson(_decodeJson(response) as Map<String, dynamic>);
+  }
+
   Future<String> obtainToken(String username, String password) async {
     final response = await _client.post(
       _uri('/api/v1/auth/token/'),
@@ -86,9 +116,6 @@ class ApiClient {
     throw ApiException(response.statusCode, response.body);
   }
 
-  /// Decode sebagai UTF-8 secara eksplisit. DRF mengirim `application/json`
-  /// tanpa parameter charset, dan `response.body` bisa jatuh ke latin1 sehingga
-  /// huruf non-ASCII (mis. emoji atau aksen) rusak.
   dynamic _decodeJson(http.Response response) =>
       jsonDecode(utf8.decode(response.bodyBytes));
 }
