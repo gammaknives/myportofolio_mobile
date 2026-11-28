@@ -6,12 +6,7 @@ class ExperienceDetailScreen extends StatelessWidget {
 
   final Experience experience;
 
-  String _formatDate(DateTime date) {
-    final local = date.toLocal();
-    final month = local.month.toString().padLeft(2, '0');
-    final day = local.day.toString().padLeft(2, '0');
-    return '${local.year}-$month-$day';
-  }
+  String _formatYear(DateTime date) => date.toLocal().year.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +48,7 @@ class ExperienceDetailScreen extends StatelessWidget {
                       label: Text(
                         endedAt == null
                             ? 'Masih berlangsung'
-                            : 'Selesai: ${_formatDate(endedAt)}',
+                            : _formatYear(endedAt),
                       ),
                     ),
                   ],

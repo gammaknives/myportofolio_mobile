@@ -37,10 +37,7 @@ class _ExperienceListScreenState extends State<ExperienceListScreen> {
   String _statusText(Experience experience) {
     final endedAt = experience.endedAt;
     if (endedAt == null) return 'Masih berlangsung';
-    final local = endedAt.toLocal();
-    final month = local.month.toString().padLeft(2, '0');
-    final day = local.day.toString().padLeft(2, '0');
-    return 'Selesai: ${local.year}-$month-$day';
+    return endedAt.toLocal().year.toString();
   }
 
   @override
